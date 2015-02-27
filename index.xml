@@ -1,17 +1,23 @@
 <craft>
-    <parameter name="id" type="int" default="0"/>
+    <parameter name="id" type="int" default="935536"/>
     <script type="text/craftml">        
 
-        function main(params){
+		var thing = require('irjs-thingiverse')
 
-            // some code to download file and save it as pig.stl
+      function main(params){
+         console.log('downloading thing id = %d', params.id)
 
-            console.log('downloading thing id = %d', params.id)
+			var flag = function(req, res, cb){
 
-            var file = 'pig.stl'
-
+				if(flag != err)
+					var file = 'node_modules/irjs-thingiverse/files/' +params.id + '.stl'
             return '<stl src="./' + file + '"/>'
         }
 
+		}
+
+		function cb(){
+			thing.getFileById(params.id)
+		}
     </script>
 </craft>
