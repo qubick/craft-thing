@@ -1,0 +1,17 @@
+<craft>
+    <parameter name="id" type="int" default="0"/>
+    <script type="text/craftml">        
+
+        function main(params){
+
+            // some code to download file and save it as pig.stl
+
+            console.log('downloading thing id = %d', params.id)
+
+            var file = 'pig.stl'
+
+            return '<stl src="./' + file + '"/>'
+        }
+
+    </script>
+</craft>
