@@ -7,13 +7,16 @@
       function main(params){
          console.log('downloading thing id = %d', params.id)
 
-			var flag = function(req, res, cb){
-
-				if(flag != err)
+			var stl = thing.getFileById(params.id)
+			
+			var flag = function(err, cb){
+				if(err)
+					throw err
+				else{
 					var file = 'node_modules/irjs-thingiverse/files/' +params.id + '.stl'
-            return '<stl src="./' + file + '"/>'
-        }
-
+         		return '<stl src="./' + file + '"/>'
+				}
+			}
 		}
 
 		function cb(){
