@@ -3,24 +3,24 @@
     <script type="text/craftml">        
 
 		var thing = require('irjs-thingiverse')
+		var tag = ''
 
-      function main(params){
+      function main(params, scope, cb){
          console.log('downloading thing id = %d', params.id)
 
-			var stl = thing.getFileById(params.id)
-			
-			var flag = function(err, cb){
-				if(err)
-					throw err
-				else{
-					var file = 'node_modules/irjs-thingiverse/files/' +params.id + '.stl'
-         		return '<stl src="./' + file + '"/>'
+			var fname = 'node_modules/irjs-thingiverse/files/' +params.id + '.stl'
+			var results = thing.getFileById(params.id, function(err, fname){
+				if(err){
+					cb(err)
+				} else {
+					tag = '<stl src="./' + fname + '"/>'
+					cb(null, tag)
+					
 				}
-			}
+			})
+			if(results)
+				return tag
 		}
 
-		function cb(){
-			thing.getFileById(params.id)
-		}
     </script>
 </craft>
