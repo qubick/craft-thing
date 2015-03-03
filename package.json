@@ -1,0 +1,23 @@
+{
+  "name": "craft-thing",
+  "version": "1.0.0",
+  "description": "include a model from thingiverse",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.53.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qubick/craft-thing"
+  },
+  "author": "Jeeeun Kim, Tom Yeh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qubick/craft-thing/issues"
+  },
+  "homepage": "https://github.com/qubick/craft-thing"
+}

@@ -2,26 +2,57 @@
     <parameter name="id" type="int" default="935536"/>
     <script type="text/craftml">        
 
-		var thing = require('irjs-thingiverse')
-		var tag = ''
+        var request = require('request'),
+            path = require('path'),
+            fs = require('fs')
+            // var tag = ''
 
-      function main(params, scope, cb){
-         console.log('downloading thing id = %d', params.id)
+        function main(params, scope, cb) {
+            console.log('downloading thing id = %d', params.id)
 
-			var fname = 'node_modules/irjs-thingiverse/files/' +params.id + '.stl'
-			
-			thing.getFileById(params.id, function(err, fname){
-				if(err){
-					cb(err)
-				} else {
-					tag = '<stl src="./' + fname + '"/>'
-					var res = cb(null, tag)
-					
-				}
-			})
-		if(scope)
-			return tag
-		}
+            doDownload(params.id, function(err, fname){
+                if (err) {
+                    cb(err)
+                } else {
+                    var tag = '<stl src="./' + fname + '"/>'
+                    cb(null, tag)
+                }
+            })
+        }
+
+        function doDownload(id, done) {
+            var url = "http://thingiverse.com/download:" + id
+                // console.log("request", url)
+            request(url, {
+                json: true
+            }, function(err, res, body) {
+                // console.log(res)
+                if (!err && res.statusCode == 200) {
+                    // console.log(body)
+                    //console.log(body) //body is stl
+                    var filename = id + '.stl',
+                        file = path.join('./', filename)
+
+                    fs.exists(file, function(exists) {
+
+                        if (exists) {
+                            done(null, filename)
+                        } else {
+                            fs.writeFile(file, body, function(err) {
+                                if (err)
+                                    throw err;
+                                console.log('saved')
+                                done(null, filename)
+                            })
+                        }
+                    })
+
+                } else {
+                    console.log('err', err)
+                    done(err)
+                }
+            })
+        }
 
     </script>
 </craft>

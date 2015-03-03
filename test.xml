@@ -1,0 +1,9 @@
+<craft>
+    <craft name='thing' src="./index.xml"/>
+    <row>
+        <thing id="72826"/>
+        <scale factor="2">
+            <thing id="72826"/>
+        </scale>
+    </row>
+</craft>
